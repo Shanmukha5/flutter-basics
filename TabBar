@@ -1,0 +1,107 @@
+import 'package:flutter/material.dart';
+
+
+void main() => runApp(MyApp());
+
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Homepage(),
+    );
+
+  }
+}
+
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin {
+
+  TabController controller;
+
+  @override
+  void initState() {
+    controller = TabController(length: 3, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: new Text("Tab bar"),
+      bottom: new TabBar(
+          controller: controller,
+          tabs:
+
+      [
+        new Tab(text: "First",),
+        new Tab(text: "Second",),
+        new Tab(text: "Third",)
+      ]
+
+      ),),
+      body: new TabBarView(
+          controller: controller,
+          children: [
+        Firstpage(),
+        Secondpage(),
+        Thirdpage()
+      ]),
+    );
+  }
+}
+
+
+class Firstpage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: new Center(
+        child: new Text("First Page",
+          style: new TextStyle(fontSize: 40.0),),
+      ),
+    );
+  }
+}
+
+
+
+class Secondpage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: new Center(
+        child: new Text("Second Page",
+            style: new TextStyle(fontSize: 40.0),),
+      ),
+    );
+  }
+}
+
+
+
+class Thirdpage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: new Center(
+        child: new Text("Third Page",
+        style: new TextStyle(fontSize: 40.0),),
+      ),
+    );
+  }
+}
+
+
+

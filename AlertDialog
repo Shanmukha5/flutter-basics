@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Homepage(),
+      title: 'Experimental App',
+    );
+  }
+}
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+
+  void alertDialog(){
+    AlertDialog dialog = new AlertDialog(
+      content: new Text("Hello!"),
+      actions: <Widget>[
+        new RaisedButton(onPressed: (){Navigator.pop(context);},child: new Text("Hi"),),
+        new RaisedButton(onPressed: (){Navigator.pop(context);},child: new Text("Bye"),)
+      ],
+    );
+    showDialog(context: context,child: dialog);
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("Alert Dialog"),),
+      body: new Container(
+        child: new Center(
+          child: new RaisedButton(onPressed: alertDialog,child: new Text("AlertDialog"),),
+        ),
+      ),
+    );
+  }
+}
+
+

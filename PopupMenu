@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+// Initializing the class Constructor
+
+class Option {
+  final Text title;
+  final Text data;
+  const Option({this.title,this.data});
+}
+
+//Creating the list of Options
+const List<Option> options = <Option> [
+  const Option(title: const Text("OPTION1"),data: const Text("Option1")),
+  const Option(title: const Text("OPTION2"),data: const Text("Option2"))
+];
+
+
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new MaterialApp(
+      home: Homepage(),
+    );
+  }
+}
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  
+  Option _selectedOptions = options[0];   // By default the selectedOption is Option1
+
+  void _selectionOption(Option option) {
+    setState(() {
+      _selectedOptions = option;          // Asigns the value of the option selected
+    });
+}
+
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: new Text("Popup Menu"),
+      actions: <Widget>[
+        IconButton(icon: Icon(Icons.search),),    // Icon in AppBar
+        new PopupMenuButton(
+
+            itemBuilder: (BuildContext context){
+              return options.map((Option option){
+                return new PopupMenuItem(
+                    value: option,
+                    child: new ListTile(title: option.title));
+              }).toList();
+
+            },
+          onSelected: _selectionOption,
+            )
+        
+
+      ],
+      ),
+      body: new Container(
+        child: _selectedOptions.data,
+
+      ),
+    );
+  }
+}
+
+

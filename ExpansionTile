@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Experimental App',
+      home: Homepage(),
+    );
+  }
+}
+
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("Expansion Tile"),),
+      body: new Container(
+        child: new Center(
+          child: new ExpansionTile(title: new Text("Main Option"),children: <Widget>[
+            new ListTile(
+              title: new Text("Option"),
+            ),
+            new ListTile(
+              title: new Text("Option"),
+            ),
+            new ListTile(
+              title: new Text("Option"),
+            )
+          ],),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+

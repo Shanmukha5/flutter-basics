@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'dart:async';
+
+
+void main()=> runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Homepage(),
+      title: 'Experimental App',
+    );
+  }
+}
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+enum Answer{YES,NO,MAYBE}
+
+class _HomepageState extends State<Homepage> {
+
+  String _answer ='';
+  void setAnswer(String value){
+    setState(() {
+      _answer = value;
+    });
+  }
+
+  Future<Null> _askuser() async{
+    switch(
+      await showDialog(context: context,
+      child: new SimpleDialog(
+        title: new Text("How are you?"),
+        children: <Widget>[
+          new SimpleDialogOption(child: new Text('Fine'),onPressed: (){Navigator.pop(context,Answer.YES);},),
+          new SimpleDialogOption(child: new Text('Not Good'),onPressed: (){Navigator.pop(context,Answer.NO);},),
+          new SimpleDialogOption(child: new Text('Average'),onPressed: (){Navigator.pop(context,Answer.MAYBE);},),
+        ],
+      ))
+    ){
+      case Answer.YES:
+        setAnswer('Fine');
+        break;
+      case Answer.NO:
+        setAnswer('Not Good');
+        break;
+      case Answer.MAYBE:
+        setAnswer('Average');
+        break;
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("Simple Dialog"),),
+      body: new Container(
+        child: new Center(
+          child: new Column(
+            children: <Widget>[
+              new Text("You are ${_answer}"),
+              new RaisedButton(onPressed: (){_askuser();},child: new Text("Answer now!"),)
+              
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+

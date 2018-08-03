@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Homepage(),
+      title: 'Learning App',
+    );
+  }
+}
+
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  int tabint = 0;       // Initialising int
+  PageOne one;
+  PageThree three;
+  PageTwo two;
+  List<Widget> pages;
+  Widget page;
+
+  @override
+  void initState() {
+    one = PageOne();
+    two = PageTwo();
+    three = PageThree();
+    pages = [one,two,three];
+    page = one;
+    super.initState();
+  }
+
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: AppBar(title: new Text("Bottom Navigation Bar "),),
+      body: page,
+      bottomNavigationBar: new BottomNavigationBar(
+          currentIndex: tabint,     // default the index is 0
+          onTap: (int Index){       // onTap wants an int to highlight the option
+            setState(() {
+              tabint = Index;
+              page = pages[Index];
+            });
+          },
+          items: [                 // Index starts from 0
+        BottomNavigationBarItem(
+          title: new Text("asdf"),
+          icon: Icon(Icons.account_circle)
+        ),
+        BottomNavigationBarItem(
+            title: new Text("asdf"),
+            icon: Icon(Icons.account_circle)
+        ),
+        BottomNavigationBarItem(
+            title: new Text("asdf"),
+            icon: Icon(Icons.account_circle)
+        ),
+      ]),
+    );
+  }
+}
+
+
+
+class PageOne extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: new Center(
+        child: new Text("Page One",style: new TextStyle(
+            fontSize: 30.0,color: Colors.redAccent
+        ),),
+      ),
+    );
+  }
+}
+
+class PageTwo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: new Center(
+        child: new Text("Page Two",style: new TextStyle(
+          fontSize: 30.0,color: Colors.yellowAccent
+        ),),
+      ),
+    );
+  }
+}
+
+
+
+class PageThree extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: new Center(
+        child: new Text("Page Three",style: new TextStyle(
+            fontSize: 30.0,color: Colors.blueAccent
+        ),),
+      ),
+    );
+  }
+}
+

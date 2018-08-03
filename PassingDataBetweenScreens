@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Experimental App',
+      home: Homepage(),
+    );
+  }
+}
+
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  TextEditingController controller = new TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("Text Passing"),),
+      body: new Container(
+        child: new Column(
+          children: <Widget>[
+            new Text("Enter your Name:",style: new TextStyle(fontSize: 20.0),),
+            new TextField(
+              controller: controller,
+            ),
+            new RaisedButton(
+                onPressed: (){
+              var route = new MaterialPageRoute(builder: (BuildContext context)=> Nextpage(value: controller.text,));
+              Navigator.of(context).push(route);
+              
+            },child: new Text("Submit"),
+
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Nextpage extends StatefulWidget {
+  final String value;
+  Nextpage({Key key,this.value}) : super(key :key);
+  @override
+  _NextpageState createState() => _NextpageState();
+}
+
+class _NextpageState extends State<Nextpage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("Displaying Text"),),
+      body: new Container(
+        child: new Center(
+          child: new Text("Hello\n ${widget.value}",style: new TextStyle(fontSize: 40.0),),
+        ),
+      ),
+    );
+  }
+}
+

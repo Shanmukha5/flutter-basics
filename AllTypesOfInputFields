@@ -1,0 +1,125 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Experimental App',
+      home: Homepage(),
+    );
+  }
+}
+
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+
+  // This is for CheckBox
+  bool choice = false;
+  void function(){
+    setState(() {
+      if(choice) {
+          choice = !choice;
+      }
+      else {
+        choice =!choice;
+      }
+    });
+  }
+
+
+
+  // This is for Radio Buttons
+  int radiogroupvalue;
+
+  void radiofunction(e){
+    setState(() {
+      if(e==1){
+        radiogroupvalue =1;
+      }
+      else if(e==2){
+        radiogroupvalue =2;
+      }
+    });
+  }
+
+  // This is for Switch
+  bool val = false;
+
+  void switchfunction(e){
+    setState(() {
+      if(e){
+        val = e;
+      }
+      else{
+        val =e;
+      }
+    });
+  }
+
+  double sliderval = 0.0;
+  var sliderlabel = '0.0';
+
+  void sliderfunction(e){
+    setState(() {
+      sliderval = e;
+      sliderlabel=e.toString();
+    });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("All types of InputFields"),),
+      body: new Container(
+        child: new Center(
+          child: new ListView(
+          children: [
+            new ListTile(
+              leading: new TextField(),
+              title: new Text("Text Field"),
+
+            ),
+            new ListTile(
+              leading:new Checkbox(onChanged:(bool e)=>function(),value: choice,),
+              title: new Text("Check Box"),
+
+            ),
+            new ListTile(
+              leading: new Radio(onChanged:(int e)=> radiofunction(e) ,value: 1, groupValue: radiogroupvalue,),
+              title: new Text("Radio 1"),
+
+            ),
+            new ListTile(
+              leading:new Radio(onChanged:(int e)=> radiofunction(e) ,value: 2, groupValue: radiogroupvalue,activeColor: Colors.deepOrange,),
+              title: new Text("Radio 2"),
+
+            ),
+            new ListTile(
+              leading:new Switch(value: val, onChanged: (bool e)=>switchfunction(e)),
+              title: new Text("Switch"),
+
+            ),
+            new ListTile(
+              leading: new Slider(value: sliderval, onChanged: (double e)=> sliderfunction(e),divisions: 10,min: 0.0,max: 20.0,
+                label: sliderlabel,
+              ),
+            )
+
+
+          ]
+          )
+        ),
+        
+      ),
+    );
+  }
+}
+

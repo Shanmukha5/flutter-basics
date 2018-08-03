@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Experimental App',
+      home: Homepage(),
+    );
+  }
+}
+
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  TextEditingController controller = new TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: new Text("All types of Buttons"),),
+      body: new Container(
+        child: new Center(
+          child: new Column(
+          children: [
+            new RaisedButton(onPressed: (){},child: new Text("Raised Button"),),
+            new FlatButton.icon(onPressed: (){}, icon: Icon(Icons.favorite), label: new Text("Flat Button")),
+            new IconButton(icon: Icon(Icons.favorite), onPressed: (){},tooltip: 'Icon Button'),
+            new ButtonBar(children: <Widget>[new Text("Buttonbar1"),new Text("Buttonbar2"),new Text("Buttonbar3"),new Text("Buttonbar4")],)
+          
+          ]
+          )
+        ),
+        
+      ),
+    floatingActionButton: new FloatingActionButton(child:new Text('F',style: new TextStyle(fontSize: 30.0),),onPressed: (){},),
+    );
+  }
+}
+
